@@ -112,6 +112,9 @@ ResearchContext
 
 The context serves as the system's working memory and provides a transparent record of how a research report was produced.
 
+The Phase 0 implementation defines this contract with Pydantic models in
+`src/state.py`.
+
 ---
 
 ## Architectural Decisions
@@ -217,33 +220,23 @@ This separation forms the foundation of the architecture.
 agentic-quant-research-system/
 
 ├── src/
+│   ├── __init__.py
+│   └── state.py
 │
-├── agents/
-│   ├── research_planner.py
-│   ├── analysis_agent.py
-│   └── report_generator.py
+├── design_notes/
+│   └── 01_state_design.md
 │
-├── tools/
-│   ├── data_fetch_tool.py
-│   ├── factor_build_tool.py
-│   ├── backtest_run_tool.py
-│   └── metrics_calc_tool.py
+├── tests/
+│   └── test_state.py
 │
-├── workflows/
-│   └── research_graph.py
-│
-├── database/
-│   └── duckdb_client.py
-│
-├── app/
-│   └── streamlit_app.py
-│
-├── reports/
-│
-├── notebooks/
-│
-└── tests/
+├── Makefile
+├── pyproject.toml
+├── requirements.txt
+└── README.md
 ```
+
+Planned modules will add `src/workflows/`, `src/tools/`, `src/agents/`,
+`src/database/`, and `src/app/` as the system moves beyond Phase 0.
 
 ---
 
@@ -289,21 +282,21 @@ Research Report
 
 Implemented
 
-* Project architecture
-* ResearchContext design
-* LangGraph workflow definition
+* Phase 0 project scaffold
+* Pydantic state models for `ResearchContext`, `TaskPlan`, `BacktestResult`,
+  `PerformanceMetrics`, and `PerformanceDiagnosis`
+* State validation and serialization tests
+* State design note in `design_notes/01_state_design.md`
 
 In Progress
 
-* Deterministic research tools
-* Planning workflow
-* Analysis workflow
+* Phase 1 mock LangGraph workflow
 
 Planned
 
+* Deterministic research tools
+* LLM planning workflow
+* Analysis and reflection workflow
 * Experiment persistence
 * Research memory
 * Interactive interface
-
-```
-```
